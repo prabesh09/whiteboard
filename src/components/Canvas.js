@@ -33,14 +33,28 @@ const Canvas = () => {
             setLines([...lines])
         }
 
+        const handleTouchMove = (e) => {
+            if (!isDrawing) return
+            const stage = stageRef.current.getStage()
+            const touchPos = e.touches[0]
+            const touchX = touchPos.clientX - stage.container().getBoundingClientRect().left
+            const touchY = touchPos.clientY - stage.container().getBoundingClientRect().top
+            let lastLine = lines[lines.length - 1]
+            lastLine.points = lastLine.points.concat([touchX, touchY])
+            setLines([...lines])
+        }
+
         if (isDrawing) {
             window.addEventListener('mousemove', handleMouseMove)
+            window.addEventListener('touchmove', handleTouchMove)
         } else {
             window.removeEventListener('mousemove', handleMouseMove)
+            window.removeEventListener('touchmove', handleTouchMove)
         }
 
         return () => {
             window.removeEventListener('mousemove', handleMouseMove)
+            window.removeEventListener('touchmove', handleTouchMove)
         }
     }, [isDrawing, lines, setLines])
 
@@ -80,6 +94,8 @@ const Canvas = () => {
                 height={window.innerHeight}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
+                onTouchStart={handleMouseDown}
+                onTouchEnd={handleMouseUp}
                 ref={stageRef}
             >
                 <Layer>

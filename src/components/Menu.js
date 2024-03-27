@@ -45,9 +45,9 @@ const Menu = ({ tool, setTool, color, setColor, bgColor, setBgColor, handleDownl
                 )}
             </div>
 
-            <button onClick={handleDownload}><FiDownload /></button>
             <button onClick={handleClear}><RxMagicWand /></button>
-        </div>
+            <button onClick={handleDownload}><FiDownload /></button>
+        </div >
     )
 }
 
