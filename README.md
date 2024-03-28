@@ -29,4 +29,4 @@
 
 ## Feedback
 
-If you have any feedback, please raise and issue!
+If you have any feedback, please raise an issue!
